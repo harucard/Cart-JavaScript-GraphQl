@@ -1,0 +1,24 @@
+{
+  "name": "Cart-JavaScript-GraphQl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harucard/Cart-JavaScript-GraphQl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harucard/Cart-JavaScript-GraphQl/issues"
+  },
+  "homepage": "https://github.com/harucard/Cart-JavaScript-GraphQl#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.12.6"
+  }
+}
