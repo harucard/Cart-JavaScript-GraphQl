@@ -3,48 +3,48 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://root:123456@localhost:27017/shop?authSource=admin',{useNewUrlParser: true,useUnifiedTopology: true})
 
-const User = mongoose.model('User', {
-    fullname: String,
-    username: String,
-    phone_number: String,
-    city: String
+const Product= mongoose.model('Product', {
+    name: String,
+    description: String,
+    quantity: Number, 
+    price: Number 
 });
 
 const typeDefs = `
   type Query {
-    getUser(id: ID!): User
-    getUsers: [User]
+    getProduct(id: ID!): Product
+    getProducts: [Product]
   }
-  type User {
+  type Product{
     id:ID!
-    fullname: String!
-    username: String!
-    phone_number: String!
-    city: String!
+    name: String!
+    description: String! 
+    quantity: Int!
+    price: Float!
   }
   type Mutation {
-    addUser(fullname: String!, username: String!, phone_number: String!, city: String!): User!,
-    deleteUser(id: ID!): String
+    addProduct(name: String!, description: String!, quantity: Int!, price: Float!): Product!,
+    deleteProduct(id: ID!): String
   }
 `
 
 const resolvers = {
     Query: {
-        getUsers: () => User.find(),
-        getUser: async (_,{id}) => {
-            var result = await User.findById(id)
+        getProducts: () => Product.find(),
+        getProduct: async (_,{id}) => {
+            var result = await Product.findById(id)
             return result;
         }
     },
     Mutation: {
-        addUser: async (_,{fullname, username, phone_number, city}) => {
-            const user = new User({fullname, username, phone_number, city})
-            await user.save()
-            return user;
+        addProduct: async (_,{name,description, quantity,price}) => {
+            const product = new Product({name,  description, quantity, price})
+            await product.save()
+            return product;
         },
-        deleteUser: async (_,{id}) => {
-          await User.findByIdAndRemove(id)
-          return "User deleted";
+        deleteProduct: async (_,{id}) => {
+          await Product.findByIdAndRemove(id)
+          return "Product deleted";
         }        
     }
 }
